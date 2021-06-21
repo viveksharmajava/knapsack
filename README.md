@@ -113,3 +113,4 @@ Steps to launch the solution program:
   Then, it calls knapsack alogrithm  and once algorith returns the result , it append the result to Problem solution and set 
  status to 'completed' and completion time 'current time' at that moment and update the record in mongodb.
    
+<img width="663" alt="Screenshot 2021-06-21 at 3 54 00 PM" src="https://user-images.githubusercontent.com/21256306/122747698-fd3e7680-d2a8-11eb-8c8b-3119af8c3748.png">
