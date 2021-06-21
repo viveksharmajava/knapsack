@@ -116,3 +116,11 @@ Steps to launch the solution program:
  status to 'completed' and completion time 'current time' at that moment and update the record in mongodb.
    
 <img width="663" alt="Screenshot 2021-06-21 at 3 54 00 PM" src="https://user-images.githubusercontent.com/21256306/122747698-fd3e7680-d2a8-11eb-8c8b-3119af8c3748.png">
+
+
+Scalability:
+
+ Since the solution  given here is using microservices architecture pattern which can be easly scale by  by deploying multiple node and enabling api-gateway and load balancer (may be netflix Eureka).
+Also We can launch Kafka as multi node cluster with some replication factors which will give  distributed load  and high availabity.
+
+Also we can run ExecutorService  to process Consumer message and calling KnapsackAlgorith to process the result parallel.
