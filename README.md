@@ -17,3 +17,84 @@ Steps to launch the solution program:
    
    ->Open terminal and navigate to project folder(maersk-knapsack) and run command 'mvn spring-boot:run'.
    ->Open terminal and navigate to project folder(knapsack-solution) and run command 'mvn spring-boot:run'.
+   
+   
+ Solution architecture :
+  I have implemented 2 microservices.
+  1.** Maersk-knapsack microsservice:**  
+  Which has exposed 2 end points  one for submit knapsack problem using (http://localhost:6543/knapsack) end point.
+  it is a post type request.
+    request paylaod sample:{"problem": {"capacity": 60, "weights": [10, 20, 33], "values": [10, 3, 30]}}
+    As soon as Maersk-knapsack service  receives the request, it insert  request payload to mongodb databse  after updating status  'submitted' and     sumbitted time.
+    mongodb generate unqiue id for each document which I am using as task id, maerk-service send message to kafka broker and return the response as below.
+    response format:
+    {
+    "task": "60d0550bfe2bd64354931712",
+    "status": "submitted",
+    "timestamps": {
+        "submitted": 1624265995932,
+        "started": null,
+        "completed": null
+    },
+    "problem": {
+        "capacity": 60,
+        "weights": [
+            10,
+            20,
+            33
+        ],
+        "values": [
+            10,
+            3,
+            30
+        ]
+    },
+    "solution": {
+        "packed_items": null,
+        "total_value": null
+    }
+}
+  
+    
+    
+  
+  2. Other end point is to check problem solution and its current execution status using ( localhost:6543/knapsack/{task_id} )
+       
+     request : http://localhost:6543/knapsack/60d0550bfe2bd64354931712
+     maersk-knapsack services fetch information from mongodb using unique {task_id} and return below  response if it is avaialable:
+     response:
+  {
+    "task": "60d0550bfe2bd64354931712",
+    "status": "completed",
+    "timestamps": {
+        "submitted": 1624265995932,
+        "started": 1624265996302,
+        "completed": 1624265996466
+    },
+    "problem": {
+        "capacity": 60,
+        "weights": [
+            10,
+            20,
+            33
+        ],
+        "values": [
+            10,
+            3,
+            30
+        ]
+    },
+    "solution": {
+        "packed_items": [
+            0,
+            2
+        ],
+        "total_value": 40
+    }
+}
+
+2. Knapsack-solution service:
+   it keep  reqeusting new message from kafka broker  each 100 ms interval using kafka consumer interface. As soon as it receivew message from kafka broker.
+   it update the status to 'started' and  start time  of Problem and update the record in mognodb.
+   it calls knapsack alogrithm  and once algorith returns the solution it update Problem solution , status to 'completed' and completion time and update the record in mongodb.
+   
