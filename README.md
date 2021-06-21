@@ -10,13 +10,15 @@ Prerequisite to run the program:
 
 Steps to launch the solution program:
 
-1. download mongo.yml and kafka.yml file.
-5. execute 'docker-compose -f mongo.yml' and 'docker-compose -f kafka.yml'  commands on terminal.
+1. download mongo.yml and docker-compose.yml file.
+5. execute 'docker-compose -f mongo.yml' and 'docker-compose -f docker-compose.yml'  commands on terminal.
 6. download project zip files(maersk-knapsack.zip, knapsack-solution.zip).
 7. after extracting zip files
    
-   ->Open terminal and navigate to project folder(maersk-knapsack) and run command 'mvn spring-boot:run'.
-   ->Open terminal and navigate to project folder(knapsack-solution) and run command 'mvn spring-boot:run'.
+   1.launch terminal and navigate to project folder(maersk-knapsack) 
+     and run command 'mvn spring-boot:run'.
+   2.launch terminal and navigate to project folder(knapsack-solution) 
+   and run command 'mvn spring-boot:run'.
    
    
  Solution architecture :
