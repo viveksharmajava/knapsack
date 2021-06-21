@@ -24,10 +24,19 @@ Steps to launch the solution program:
   1.** Maersk-knapsack microsservice:**  
   Which has exposed 2 end points  one for submit knapsack problem using (http://localhost:6543/knapsack) end point.
   it is a post type request.
+  
+  
     request paylaod sample:{"problem": {"capacity": 60, "weights": [10, 20, 33], "values": [10, 3, 30]}}
+    
+    
     As soon as Maersk-knapsack service  receives the request, it insert  request payload to mongodb databse  after updating status  'submitted' and     sumbitted time.
+    
+    
     mongodb generate unqiue id for each document which I am using as task id, maerk-service send message to kafka broker and return the response as below.
-    response format:
+   
+   
+   
+   response format:
     {
     "task": "60d0550bfe2bd64354931712",
     "status": "submitted",
