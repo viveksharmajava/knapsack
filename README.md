@@ -58,12 +58,16 @@ Steps to launch the solution program:
     
     
   
-  2. Other end point is to check problem solution and its current execution status using ( localhost:6543/knapsack/{task_id} )
+  2. Second endpoint is to check problem solution and its current execution status using ( localhost:6543/knapsack/{task_id} )
        
      request : http://localhost:6543/knapsack/60d0550bfe2bd64354931712
+     
+     
      maersk-knapsack services fetch information from mongodb using unique {task_id} and return below  response if it is avaialable:
+     
+     
      response:
-  {
+   {
     "task": "60d0550bfe2bd64354931712",
     "status": "completed",
     "timestamps": {
@@ -94,7 +98,9 @@ Steps to launch the solution program:
 }
 
 2. Knapsack-solution service:
-   it keep  reqeusting new message from kafka broker  each 100 ms interval using kafka consumer interface. As soon as it receivew message from kafka broker.
-   it update the status to 'started' and  start time  of Problem and update the record in mognodb.
-   it calls knapsack alogrithm  and once algorith returns the solution it update Problem solution , status to 'completed' and completion time and update the record in mongodb.
+
+ it keep  reqeusting new message from kafka broker  each 100 ms interval using kafka consumer interface. 
+ As soon as it receivew message from kafka broker.it update the status to 'started' and  start time  of Problem and update the record in mognodb.
+ it calls knapsack alogrithm  and once algorith returns the solution it update Problem solution 
+ status to 'completed' and completion time and update the record in mongodb.
    
