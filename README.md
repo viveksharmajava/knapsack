@@ -100,7 +100,7 @@ Steps to launch the solution program:
 2. Knapsack-solution service:
 
  it keep  reqeusting new message from kafka broker  each 100 ms interval using kafka consumer interface. 
- As soon as it receivew message from kafka broker.it update the status to 'started' and  start time  of Problem and update the record in mognodb.
- it calls knapsack alogrithm  and once algorith returns the solution it update Problem solution 
- status to 'completed' and completion time and update the record in mongodb.
+ As soon as it receivew message from kafka broker. It update the status to 'started' and  start time  of Problem and update the record in mognodb.
+  Then, it calls knapsack alogrithm  and once algorith returns the result , it append the result to Problem solution and set 
+ status to 'completed' and completion time 'current time' at that moment and update the record in mongodb.
    
